@@ -12,7 +12,7 @@ report_result = ""
 report_summary = ""
 chat_history = []
 
-client = genai.Client(api_key="")
+client = genai.Client(api_key=os.getenv('GENAI_API_KEY'))
 
 app = Flask(__name__)
 report_text = ""
