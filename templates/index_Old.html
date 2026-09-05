@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ai Health Report Analyzer</title>
+</head>
+<body>
+    <h1>Ai Health Report Analyzer</h1>
+  <form action="/upload" method="POST" enctype="multipart/form-data">
+    <input type="file" name="report">
+    <button type="submit">Upload Report</button>
+</form>
+
+<h3>Result</h3>
+<pre>{{ message }}</pre>
+<h2>🤖 AI Health Summary</h2>
+
+<pre>{{ ai_summary }}</pre>
+<hr>
+
+<h2>🤖 Ask AI About Your Report</h2>
+
+<form action="/ask" method="POST">
+
+    <input
+        type="text"
+        name="question"
+        placeholder="Ask anything about your report..."
+        style="width:350px;">
+
+    <button type="submit">
+        Ask AI
+    </button>
+
+</form>
+
+{% if ai_answer %}
+
+<h3>AI Answer</h3>
+
+<pre>{{ ai_answer }}</pre>
+
+<h3>💬 Chat History</h3>
+<pre>{{ chat_history }}</pre>
+
+{% endif %}
+
+</body>
+</html>

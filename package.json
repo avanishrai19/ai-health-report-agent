@@ -1,0 +1,17 @@
+{
+  "name": "ai-based-helth-analyser",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "python -m py_compile app.py"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "devDependencies": {
+    "@tailwindcss/cli": "^4.3.2",
+    "tailwindcss": "^4.3.2"
+  }
+}
