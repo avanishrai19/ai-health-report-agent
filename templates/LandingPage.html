@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Welcome - AI Health Report Analyzer</title>
+    <!-- Modern Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+    <!-- CSS Link -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='LandingPage.css') }}">
+</head>
+<body>
+
+    <!-- Navbar -->
+    <nav class="navbar">
+        <h2 class="logo">🤖 AI Health Analyzer</h2>
+        <div class="nav-links">
+            <a href="/home" class="nav-btn">Open App</a>
+        </div>
+    </nav>
+
+    <!-- Welcome Hero Section -->
+    <section class="hero">
+        <div class="glass-card">
+            
+            <!-- Welcoming Icon -->
+            <div class="icon-container">
+                <span class="wave-icon" style="display: inline-block;">👋</span>
+            </div>
+            
+            <h1>Welcome to Your <br><span class="text-blue">Smart Health Assistant</span></h1>
+            
+            <p>
+                Instantly analyze your medical reports using advanced AI. 
+                Get simplified insights, understand your parameters, and take control of your health in seconds.
+            </p>
+
+            <!-- Added Functions Highlights -->
+            <div class="features-list">
+                <div class="feature-item">📄 Easy PDF Upload</div>
+                <div class="feature-item">⚡ Instant AI Summary</div>
+                <div class="feature-item">💬 Chat with Health AI</div>
+            </div>
+
+            <div class="buttons">
+                <!-- Ye button direct app.py ke /home route par le jayega -->
+                <a href="/home" class="btn primary-btn">🚀 Start Analyzing Now</a>
+            </div>
+
+        </div>
+    </section>
+
+</body>
+</html>

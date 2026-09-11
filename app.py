@@ -20,8 +20,11 @@ report_text = ""
 UPLOAD_FOLDER = "upload"
 app.config["UPLOAD_FOLDER"] = UPLOAD_FOLDER
 
-
 @app.route("/")
+def landing():
+    return render_template("LandingPage.html")
+
+@app.route("/home")
 def home():
     return render_template("index.html", message="No Report Upload Yet")
 
@@ -318,7 +321,7 @@ def ask_ai():
     question = request.form["question"]
     try:
         response = client.models.generate_content(
-            model="gemini-2.5-flash",
+            model="gemini-2.0-flash",
             contents=f"""
             You are an AI Health Report Analyzer Agent.
 
