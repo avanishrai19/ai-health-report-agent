@@ -1,54 +1,137 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Welcome - AI Health Report Analyzer</title>
-    <!-- Modern Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800&display=swap" rel="stylesheet">
-    <!-- CSS Link -->
+    <meta name="description"
+        content="AI Health Report Analyzer turns complex medical reports into clear, simple insights.">
+    <title>AI Health Report Analyzer</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@600;700;800&display=swap"
+        rel="stylesheet">
     <link rel="stylesheet" href="{{ url_for('static', filename='LandingPage.css') }}">
 </head>
+
 <body>
-
-    <!-- Navbar -->
-    <nav class="navbar">
-        <h2 class="logo">🤖 AI Health Analyzer</h2>
-        <div class="nav-links">
-            <a href="/home" class="nav-btn">Open App</a>
+    <header class="site-header">
+        <nav class="navbar container" aria-label="Main navigation">
+            <a class="brand" href="/" aria-label="AI Health Analyzer home"><span class="brand-mark"
+                    aria-hidden="true">&#10022;</span><span>AI Health Analyzer</span></a>
+            <div class="nav-links">
+                <a href="#how-it-works">How it works</a><a href="#features">Features</a>
+                <a href="/login" class="nav-login">Log in</a>
+                <a href="/register" class="nav-register">Sign up</a>
+                <a href="/home" class="nav-cta">Open Analyzer <span aria-hidden="true">&rarr;</span></a>
+            </div>
+        </nav>
+    </header>
+    <main>
+        <section class="hero container" aria-labelledby="hero-title">
+            <div class="hero-copy">
+                <p class="eyebrow"><span class="status-dot"></span> AI-powered report understanding</p>
+                <h1 id="hero-title">Your health report,<br><span>made easier to understand.</span></h1>
+                <p class="hero-description">Upload your medical report and receive a clear, easy-to-read AI summary of
+                    your health parameters in seconds.</p>
+                <div class="hero-actions"><a href="/home" class="button button-primary">Analyze my report <span
+                            aria-hidden="true">&rarr;</span></a><a href="#how-it-works"
+                        class="button button-secondary">See how it works</a></div>
+                <div class="trust-row" aria-label="Key benefits"><span><b>&#10003;</b> Simple
+                        explanations</span><span><b>&#10003;</b> PDF ready</span><span><b>&#10003;</b> Private by
+                        design</span></div>
+            </div>
+            <div class="report-preview" aria-label="Example health report summary">
+                <div class="preview-topbar">
+                    <div class="mini-brand"><span>&#10022;</span> Health summary</div><span
+                        class="secure-pill">&#128274; Secure</span>
+                </div>
+                <div class="preview-body">
+                    <div class="summary-heading">
+                        <div class="summary-icon">&#10003;</div>
+                        <div><small>AI REPORT OVERVIEW</small>
+                            <h2>Your summary is ready</h2>
+                        </div>
+                    </div>
+                    <p class="summary-copy">Your report has been translated into clear, useful insights.</p>
+                    <div class="metric-card">
+                        <div><span class="metric-label">HEALTH OVERVIEW</span><strong>Mostly within range</strong></div>
+                        <span class="metric-badge">Reviewed</span>
+                    </div>
+                    <div class="preview-lines" aria-hidden="true"><i></i><i></i><i></i></div>
+                    <div class="chat-preview"><span class="bot-icon">&#10022;</span>
+                        <p>Ask me anything about your report.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section class="steps-section" id="how-it-works">
+            <div class="container">
+                <div class="section-heading">
+                    <p class="eyebrow">A simpler experience</p>
+                    <h2>From report to insight in three steps</h2>
+                </div>
+                <div class="steps-grid">
+                    <article class="step-card"><span class="step-number">01</span>
+                        <div class="step-icon">&#128196;</div>
+                        <h3>Upload your report</h3>
+                        <p>Select your PDF medical report securely from your device.</p>
+                    </article>
+                    <article class="step-card"><span class="step-number">02</span>
+                        <div class="step-icon">&#10022;</div>
+                        <h3>Let AI analyze it</h3>
+                        <p>Our analyzer reads your health parameters and organizes the key details.</p>
+                    </article>
+                    <article class="step-card"><span class="step-number">03</span>
+                        <div class="step-icon">&#128172;</div>
+                        <h3>Understand &amp; ask</h3>
+                        <p>Read a simple summary, then ask follow-up questions about your report.</p>
+                    </article>
+                </div>
+            </div>
+        </section>
+        <section class="features container" id="features">
+            <div class="feature-intro">
+                <p class="eyebrow">Built for clarity</p>
+                <h2>Helpful insight without the medical jargon.</h2>
+                <p>Designed to help you prepare better questions for your healthcare professional.</p>
+            </div>
+            <div class="feature-list">
+                <article><span>&#128202;</span>
+                    <div>
+                        <h3>Clear report summaries</h3>
+                        <p>Key information is organized into an easy-to-scan overview.</p>
+                    </div>
+                </article>
+                <article><span>&#128172;</span>
+                    <div>
+                        <h3>Ask about your results</h3>
+                        <p>Get simple explanations of terms and parameters in your report.</p>
+                    </div>
+                </article>
+                <article><span>&#128274;</span>
+                    <div>
+                        <h3>Privacy-conscious</h3>
+                        <p>Your report is processed to provide insights, not permanent storage.</p>
+                    </div>
+                </article>
+            </div>
+        </section>
+        <section class="final-cta container">
+            <div>
+                <p class="eyebrow">Ready when you are</p>
+                <h2>Make your next health report easier to read.</h2>
+            </div><a href="/home" class="button button-primary">Start analyzing <span
+                    aria-hidden="true">&rarr;</span></a>
+        </section>
+    </main>
+    <footer class="site-footer">
+        <div class="container"><span class="brand"><span class="brand-mark" aria-hidden="true">&#10022;</span> AI Health
+                Analyzer</span>
+            <p>For informational purposes only. Always consult a qualified healthcare professional.</p>
         </div>
-    </nav>
-
-    <!-- Welcome Hero Section -->
-    <section class="hero">
-        <div class="glass-card">
-            
-            <!-- Welcoming Icon -->
-            <div class="icon-container">
-                <span class="wave-icon" style="display: inline-block;">👋</span>
-            </div>
-            
-            <h1>Welcome to Your <br><span class="text-blue">Smart Health Assistant</span></h1>
-            
-            <p>
-                Instantly analyze your medical reports using advanced AI. 
-                Get simplified insights, understand your parameters, and take control of your health in seconds.
-            </p>
-
-            <!-- Added Functions Highlights -->
-            <div class="features-list">
-                <div class="feature-item">📄 Easy PDF Upload</div>
-                <div class="feature-item">⚡ Instant AI Summary</div>
-                <div class="feature-item">💬 Chat with Health AI</div>
-            </div>
-
-            <div class="buttons">
-                <!-- Ye button direct app.py ke /home route par le jayega -->
-                <a href="/home" class="btn primary-btn">🚀 Start Analyzing Now</a>
-            </div>
-
-        </div>
-    </section>
-
+    </footer>
 </body>
+
 </html>

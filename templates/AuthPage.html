@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% if mode == 'login' %}Log in{% else %}Create account{% endif %} | AI Health Analyzer</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@600;700;800&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='LandingPage.css') }}">
+</head>
+
+<body class="auth-page">
+    <header class="site-header">
+        <nav class="navbar container" aria-label="Main navigation">
+            <a class="brand" href="/"><span class="brand-mark" aria-hidden="true">&#10022;</span><span>AI Health
+                    Analyzer</span></a>
+            <a href="/" class="auth-back">&larr; Back to home</a>
+        </nav>
+    </header>
+    <main class="auth-main container">
+        <section class="auth-card" aria-labelledby="auth-title">
+            <div class="auth-icon" aria-hidden="true">&#10022;</div>
+            {% if mode == 'login' %}
+            <p class="eyebrow">Welcome back</p>
+            <h1 id="auth-title">Log in to your account</h1>
+            <p class="auth-copy">Access your health-report insights and continue where you left off.</p>
+            {% else %}
+            <p class="eyebrow">Get started</p>
+            <h1 id="auth-title">Create your account</h1>
+            <p class="auth-copy">Start making your health reports easier to understand.</p>
+            {% endif %}
+            <form class="auth-form" action="#" method="post">
+                {% if mode == 'register' %}<label>Full name<input type="text" name="name" autocomplete="name"
+                        placeholder="Your full name" required></label>{% endif %}
+                <label>Email address<input type="email" name="email" autocomplete="email" placeholder="you@example.com"
+                        required></label>
+                <label>Password<input type="password" name="password"
+                        autocomplete="{% if mode == 'login' %}current-password{% else %}new-password{% endif %}"
+                        placeholder="Enter your password" required></label>
+                <button class="button button-primary auth-submit" type="submit">{% if mode == 'login' %}Log in{% else
+                    %}Create account{% endif %} <span aria-hidden="true">&rarr;</span></button>
+            </form>
+            {% if mode == 'login' %}<p class="auth-switch">New here? <a href="/register">Create an account</a></p>{%
+            else %}<p class="auth-switch">Already have an account? <a href="/login">Log in</a></p>{% endif %}
+        </section>
+    </main>
+</body>
+
+</html>

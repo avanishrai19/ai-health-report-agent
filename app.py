@@ -24,6 +24,14 @@ app.config["UPLOAD_FOLDER"] = UPLOAD_FOLDER
 def landing():
     return render_template("LandingPage.html")
 
+@app.route("/login")
+def login():
+    return render_template("AuthPage.html", mode="login")
+
+@app.route("/register")
+def register():
+    return render_template("AuthPage.html", mode="register")
+
 @app.route("/home")
 def home():
     return render_template("index.html", message="No Report Upload Yet")

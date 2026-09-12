@@ -11,15 +11,17 @@
 
 </head>
 
-<body class="min-h-screen bg-linear-to-br from-blue-50 via-white to-cyan-100 text-slate-900 dark:from-slate-900 dark:via-slate-950 dark:to-slate-900 dark:text-slate-100 transition-colors duration-300">
+<body
+    class="min-h-screen bg-linear-to-br from-blue-50 via-white to-cyan-100 text-slate-900 dark:from-slate-900 dark:via-slate-950 dark:to-slate-900 dark:text-slate-100 transition-colors duration-300">
 
-    <button id="dark-mode-toggle" class="dark-mode-toggle" type="button" aria-pressed="false" aria-label="Enable dark mode">
+    <button id="dark-mode-toggle" class="dark-mode-toggle" type="button" aria-pressed="false"
+        aria-label="Enable dark mode">
         <span aria-hidden="true">🌙</span>
         <span class="dark-mode-label">Dark mode</span>
     </button>
 
     <div class="max-w-6xl mx-auto px-6 py-10">
-            <!-- Hero Section -->
+        <!-- Hero Section -->
         <div class="text-center mb-12">
 
             <h1 class="text-5xl font-extrabold text-blue-700">
@@ -84,7 +86,7 @@
                 </p>
 
             </form>
-        
+
 
 
         </div>
@@ -101,22 +103,22 @@
         </div>
 
         <!-- AI Summary -->
-        <div class="bg-white rounded-3xl shadow-xl p-8 mt-10 overflow-hidden dark:bg-slate-800 dark:shadow-slate-900/40">
+        <div
+            class="bg-white rounded-3xl shadow-xl p-8 mt-10 overflow-hidden dark:bg-slate-800 dark:shadow-slate-900/40">
 
             <h2 class="text-2xl font-bold mb-4">
                 🤖 AI Health Summary
             </h2>
 
-            <div id="summary-text" class="whitespace-pre-wrap break-all overflow-x-auto max-w-full text-slate-700 dark:text-slate-200 leading-7">
-            {{ ai_summary }}
+            <div id="summary-text"
+                class="whitespace-pre-wrap break-all overflow-x-auto max-w-full text-slate-700 dark:text-slate-200 leading-7">
+                {{ ai_summary }}
             </div>
 
-            <button
-             type="button"
-             id="copy-summary-btn"
-             class="mt-4 bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition dark:bg-sky-500 dark:hover:bg-sky-400">
- 
-            📋 Copy Summary
+            <button type="button" id="copy-summary-btn"
+                class="mt-4 bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition dark:bg-sky-500 dark:hover:bg-sky-400">
+
+                📋 Copy Summary
 
             </button>
 
@@ -170,7 +172,8 @@
 
             {% if chat_history %}
 
-            <div id="chat-box" class="mt-6 h-112.5 overflow-y-auto space-y-5 bg-gray-50 rounded-2xl p-5 border dark:bg-slate-900 dark:border-slate-700">
+            <div id="chat-box"
+                class="mt-6 h-112.5 overflow-y-auto space-y-5 bg-gray-50 rounded-2xl p-5 border dark:bg-slate-900 dark:border-slate-700">
 
                 {% for chat in chat_history %}
 
@@ -203,7 +206,8 @@
 
                     </div>
 
-                    <div class="bg-white border p-4 rounded-2xl max-w-[75%] shadow dark:bg-slate-700 dark:border-slate-600 dark:text-slate-100">
+                    <div
+                        class="bg-white border p-4 rounded-2xl max-w-[75%] shadow dark:bg-slate-700 dark:border-slate-600 dark:text-slate-100">
 
                         {{ chat["message"] }}
 
@@ -224,6 +228,6 @@
         </div>
 
     </div>
-    
+
     <script src="{{ url_for('static', filename='javascript/script.js') }}"></script>
 </body>
