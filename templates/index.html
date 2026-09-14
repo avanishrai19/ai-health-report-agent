@@ -13,12 +13,20 @@
 
 <body
     class="min-h-screen bg-linear-to-br from-blue-50 via-white to-cyan-100 text-slate-900 dark:from-slate-900 dark:via-slate-950 dark:to-slate-900 dark:text-slate-100 transition-colors duration-300">
-
+    
     <button id="dark-mode-toggle" class="dark-mode-toggle" type="button" aria-pressed="false"
         aria-label="Enable dark mode">
         <span aria-hidden="true">🌙</span>
         <span class="dark-mode-label">Dark mode</span>
     </button>
+     
+    <!-- Logout button and welcome message if user is logged in -->
+    {% if user_name %}
+    <div class="header-profile">
+    <span class="welcome-text">Welcome, {{ user_name }}!</span>
+    <a href="/logout" class="logout-btn">Logout</a>
+    </div>
+    {% endif %}
 
     <div class="max-w-6xl mx-auto px-6 py-10">
         <!-- Hero Section -->
