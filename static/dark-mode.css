@@ -1,236 +1,146 @@
 :root {
-  color-scheme: light;
+  color-scheme: light
 }
 
-html, body, *, *::before, *::after {
-  transition: background-color 0.35s ease, color 0.35s ease, border-color 0.35s ease, box-shadow 0.35s ease, transform 0.25s ease;
-}
-
-html.theme-switching {
-  transition: background-color 0.35s ease;
-}
-
-.dark-mode-toggle {
-  position: fixed;
-  z-index: 10;
-  top: 1.25rem;
-  right: 1.25rem;
-  display: inline-flex;
-  gap: .5rem;
-  align-items: center;
-  padding: .65rem .9rem;
-  color: #334155;
-  font-size: .875rem;
-  font-weight: 700;
-  background: rgba(255, 255, 255, .9);
-  border: 1px solid #cbd5e1;
-  border-radius: 999px;
-  box-shadow: 0 6px 18px rgba(15, 23, 42, .1);
-  transform: translateY(0) scale(1);
-  transition: transform 0.25s ease, background-color 0.35s ease, border-color 0.35s ease, color 0.35s ease, box-shadow 0.35s ease;
-}
-
-.dark-mode-toggle:hover {
-  transform: translateY(-1px) scale(1.02);
+html,
+body,
+*,
+*:before,
+*:after {
+  transition: background-color .3s, color .3s, border-color .3s, box-shadow .3s, transform .2s
 }
 
 html.dark {
   color-scheme: dark;
+  --ink: #f1f5f9;
+  --muted: #bdc9da;
+  --line: #27364d;
+  --paper: rgba(15, 23, 42, .92)
 }
 
 html.dark body {
-  background: radial-gradient(circle at top, #0f172a 0%, #020617 70%) !important;
-  color: #e2e8f0 !important;
+  background: radial-gradient(circle at top, #132342 0%, #020617 70%)
 }
 
-html.dark body > div > .text-center:first-child p,
-html.dark .quick-question,
-html.dark .text-gray-600,
-html.dark .text-gray-700,
-html.dark .text-gray-500,
-html.dark .text-gray-800,
-html.dark .text-slate-700,
-html.dark .text-slate-100,
-html.dark .text-blue-600,
-html.dark .text-blue-700,
-html.dark h1,
-html.dark h2,
-html.dark h3,
-html.dark .bg-white h2,
-html.dark #drop-area,
-html.dark #question-input,
-html.dark pre,
-html.dark #summary-text,
-html.dark .ai-message,
-html.dark .user-message {
-  color: #e2e8f0 !important;
+html.dark body:before {
+  background: #173b73;
+  opacity: .3
 }
 
-html.dark .bg-white,
-html.dark .bg-gray-50,
-html.dark .bg-gray-100,
-html.dark .bg-green-50,
-html.dark .bg-slate-800,
-html.dark .bg-slate-900,
-html.dark .bg-slate-700,
-html.dark .bg-slate-600,
-html.dark .bg-blue-50,
-html.dark .bg-cyan-100,
-html.dark .bg-blue-100,
-html.dark #chat-box,
-html.dark #summary-text,
-html.dark #drop-area {
-  background-color: #0f172a !important;
+html.dark body:after {
+  background: #07665f;
+  opacity: .22
 }
 
-html.dark .bg-white,
-html.dark .bg-gray-50,
-html.dark .bg-gray-100,
-html.dark .bg-slate-800,
-html.dark #chat-box,
-html.dark #summary-text,
-html.dark .bg-slate-700,
-html.dark .bg-slate-600 {
-  border-color: rgba(148, 163, 184, 0.28) !important;
+html.dark .app-header {
+  border-color: rgba(148, 163, 184, .16);
+  background: rgba(2, 6, 23, .72)
 }
 
-html.dark .bg-white {
-  box-shadow: 0 20px 50px rgba(15, 23, 42, 0.45) !important;
+html.dark .brand,
+html.dark .card-heading h2,
+html.dark .analyzer-hero h1 {
+  color: #f8fafc
 }
 
-html.dark .text-blue-700,
-html.dark .text-blue-600 {
-  color: #7dd3fc !important;
+html.dark .analyzer-hero h1 span {
+  color: #7dd3fc
 }
 
-html.dark .border-blue-300,
-html.dark .border-blue-600,
-html.dark .border-gray-200,
-html.dark .border-gray-300,
-html.dark .border,
-html.dark #question-input,
-html.dark #drop-area,
-html.dark #chat-box,
-html.dark pre,
-html.dark #summary-text {
-  border-color: rgba(148, 163, 184, 0.32) !important;
-}
-
-html.dark .quick-question {
-  background-color: #15263f !important;
-  border-color: #334155 !important;
-  color: #e2e8f0 !important;
-}
-
-html.dark .quick-question:hover {
-  background-color: #1e293b !important;
+html.dark .system-status,
+html.dark .welcome-text {
+  color: #bdc9da
 }
 
 html.dark .dark-mode-toggle {
-  background-color: rgba(148, 163, 184, 0.12);
   color: #e2e8f0;
-  border-color: rgba(148, 163, 184, 0.35);
+  background: rgba(148, 163, 184, .12);
+  border-color: rgba(148, 163, 184, .35)
 }
 
-html.dark .dark-mode-toggle:hover {
-  background-color: rgba(148, 163, 184, 0.18);
+html.dark .logout-btn {
+  color: #fda4af;
+  background: rgba(251, 113, 133, .08);
+  border-color: rgba(251, 113, 133, .25)
 }
 
-html.dark .bg-blue-600 {
-  background-color: #0ea5e9 !important;
+html.dark .panel {
+  border-color: rgba(148, 163, 184, .2);
+  box-shadow: 0 20px 50px rgba(0, 0, 0, .28)
 }
 
-html.dark .bg-green-600 {
-  background-color: #16a34a !important;
+html.dark .drop-area {
+  background: linear-gradient(145deg, #172554, #0f172a);
+  border-color: #475569
 }
 
-html.dark .bg-blue-100 {
-  background-color: #1e293b !important;
+html.dark .drop-area:hover,
+html.dark .drop-area.drag-active {
+  background: #16345a;
+  border-color: #60a5fa
 }
 
-html.dark .text-white {
-  color: #ffffff !important;
+html.dark .drop-area.file-selected {
+  background: #103638;
+  border-color: #2bb8a7
 }
 
-html.dark {
-  --ink: #f1f5f9;
-  --muted: #cbd5e1;
-  --surface: rgba(15, 23, 42, .92);
+html.dark .upload-icon {
+  color: #7dd3fc;
+  background: #1e3a5f
 }
 
-html.dark .hero-title,
-html.dark h1.text-5xl {
-  color: #f8fafc !important;
-  text-shadow: 0 2px 18px rgba(125, 211, 252, .22);
+html.dark .drop-area>span:not(.upload-icon):not(.file-name),
+html.dark .privacy-note,
+html.dark .app-footer {
+  color: #a8b7ca
 }
 
-html.dark .hero-subtitle {
-  color: #cbd5e1 !important;
+html.dark .file-name {
+  color: #93c5fd
 }
 
-html.dark #drop-area {
-  background: linear-gradient(145deg, #172554, #0f172a) !important;
-  border-color: #475569 !important;
+html.dark .result-card pre,
+html.dark #summary-text,
+html.dark .chat-box {
+  color: #e2e8f0;
+  background: #020817;
+  border-color: #334155
 }
 
-html.dark #drop-area:hover {
-  background: #1e3a5f !important;
+html.dark .copy-button {
+  color: #bae6fd;
+  background: #1e3a5f
 }
 
-html.dark #drop-area > div {
-  background: #1e3a5f !important;
+html.dark .ask-form input {
+  color: #f8fafc;
+  background: #111c31;
+  border-color: #475569
 }
 
-html.dark pre,
-html.dark #summary-text {
-  color: #e2e8f0 !important;
-  background: #020617 !important;
-  border-color: #334155 !important;
+html.dark .quick-question {
+  color: #d4dfed;
+  background: #15263f;
+  border-color: #334155
 }
 
-html.dark #copy-summary-btn {
-  color: #bae6fd !important;
-  background: #1e3a5f !important;
-}
-
-html.dark #copy-summary-btn:hover {
-  background: #1e4d78 !important;
-}
-
-html.dark #question-input {
-  background: #1e293b !important;
-  border-color: #475569 !important;
-  color: #f8fafc !important;
-}
-
-html.dark #question-input::placeholder {
-  color: #94a3b8 !important;
-}
-
-html.dark #chat-box {
-  background: #020617 !important;
-  border-color: #334155 !important;
-}
-
-html.dark .user-message {
-  color: #ffffff !important;
-  background: #2563eb !important;
-}
-
-html.dark .user-avatar {
-  color: #ffffff !important;
-  background: #1d4ed8 !important;
-  border: 2px solid #93c5fd;
-}
-
-html.dark .ai-avatar {
-  background: #0f766e !important;
-  border: 2px solid #5eead4;
-  box-shadow: 0 0 0 3px rgba(45, 212, 191, .12);
+html.dark .quick-question:hover {
+  color: #bae6fd;
+  background: #1e3a5f
 }
 
 html.dark .ai-message {
-  color: #f1f5f9 !important;
-  background: #1e293b !important;
-  border-color: #475569 !important;
+  color: #e2e8f0;
+  background: #172235;
+  border-color: #3b4b63
+}
+
+html.dark .ai-avatar {
+  color: #5eead4;
+  background: #123c3b
+}
+
+html.dark .app-footer {
+  border-color: rgba(148, 163, 184, .18)
 }

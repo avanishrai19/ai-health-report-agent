@@ -1,168 +1,58 @@
-console.log("Script Loaded Successfully");
-const darkModeToggle = document.getElementById("dark-mode-toggle");
-const darkModeLabel = darkModeToggle?.querySelector(".dark-mode-label");
+const darkModeToggle = document.getElementById('dark-mode-toggle');
+const darkModeLabel = darkModeToggle?.querySelector('.dark-mode-label');
+const themeIcon = darkModeToggle?.querySelector('.theme-icon');
 
 function setDarkMode(enabled) {
-    document.documentElement.classList.add("theme-switching");
-    document.documentElement.classList.toggle("dark", enabled);
-    darkModeToggle?.setAttribute("aria-pressed", String(enabled));
-    darkModeToggle?.setAttribute("aria-label", enabled ? "Enable light mode" : "Enable dark mode");
-
-    if (darkModeLabel) {
-        darkModeLabel.textContent = enabled ? "Light mode" : "Dark mode";
-    }
-
-    setTimeout(() => {
-        document.documentElement.classList.remove("theme-switching");
-    }, 350);
+  document.documentElement.classList.toggle('dark', enabled);
+  darkModeToggle?.setAttribute('aria-pressed', String(enabled));
+  darkModeToggle?.setAttribute('aria-label', enabled ? 'Enable light mode' : 'Enable dark mode');
+  if (darkModeLabel) darkModeLabel.textContent = enabled ? 'Light mode' : 'Dark mode';
+  if (themeIcon) themeIcon.textContent = enabled ? '☀' : '☾';
 }
 
-const savedTheme = localStorage.getItem("theme");
-const useDarkMode = savedTheme ? savedTheme === "dark" : window.matchMedia("(prefers-color-scheme: dark)").matches;
-setDarkMode(useDarkMode);
-
-darkModeToggle?.addEventListener("click", () => {
-    const enabled = !document.documentElement.classList.contains("dark");
-    setDarkMode(enabled);
-    localStorage.setItem("theme", enabled ? "dark" : "light");
+const savedTheme = localStorage.getItem('theme');
+setDarkMode(savedTheme ? savedTheme === 'dark' : window.matchMedia('(prefers-color-scheme: dark)').matches);
+darkModeToggle?.addEventListener('click', () => {
+  const enabled = !document.documentElement.classList.contains('dark');
+  setDarkMode(enabled);
+  localStorage.setItem('theme', enabled ? 'dark' : 'light');
 });
 
-const dropArea = document.getElementById("drop-area");
-const fileInput = document.getElementById("file-input");
-const fileName = document.getElementById("file-name");
-
-// Click on box
-dropArea.addEventListener("click", () => {
-    fileInput.click();
-});
-
-// Show selected file name
-fileInput.addEventListener("change", () => {
-
-    if (fileInput.files.length > 0) {
-
-        fileName.innerHTML = `
-        ✅ <span class="font-semibold">
-        ${fileInput.files[0].name}
-        </span>
-        <br>
-        <span class="text-green-600">
-        File Selected Successfully
-        </span>
-        `;
-
-        dropArea.classList.remove("border-blue-300");
-
-        dropArea.classList.add(
-            "border-green-500",
-            "bg-green-50"
-        );
-
-    }
-
-});
-
-// Drag Over
-dropArea.addEventListener("dragover", (e) => {
-
-    e.preventDefault();
-
-    dropArea.classList.add("border-blue-600", "bg-blue-100");
-
-});
-
-// Drag Leave
-dropArea.addEventListener("dragleave", () => {
-
-    dropArea.classList.remove("border-blue-600", "bg-blue-100");
-
-});
-
-// Drop File
-dropArea.addEventListener("drop", (e) => {
-
-    e.preventDefault();
-
-    dropArea.classList.remove("border-blue-600", "bg-blue-100");
-
-    fileInput.files = e.dataTransfer.files;
-
-    fileName.innerHTML = `
-✅ <span class="font-semibold">
-${e.dataTransfer.files[0].name}
-</span>
-
-<br>
-
-<span class="text-green-600">
-File Selected Successfully
-</span>
-`;
-
-    dropArea.classList.remove("border-blue-300");
-
-    dropArea.classList.add(
-        "border-green-500",
-        "bg-green-50"
-    );
-
-});
-//analysis btn loading design
-const uploadForm = document.getElementById("upload-form");
-const uploadBtn = document.getElementById("upload-btn");
-
-uploadForm.addEventListener("submit", () => {
-
-    uploadBtn.innerHTML = "⏳ Analyzing...";
-
-    uploadBtn.disabled = true;
-
-});
-//ask btn loading design
-const askForm = document.getElementById("ask-form");
-const askBtn = document.getElementById("ask-btn");
-
-askForm.addEventListener("submit", () => {
-
-    askBtn.innerHTML = "⏳ AI is Thinking...";
-
-    askBtn.disabled = true;
-
-});
-// Scroll to bottom of chat box on page load
-window.addEventListener("load", function () {
-
-    const chatBox = document.getElementById("chat-box");
-
-    if (chatBox) {
-
-        chatBox.scrollIntoView({
-            behavior: "smooth",
-            block: "end"
-        });
-
-        chatBox.scrollTop = chatBox.scrollHeight;
-    }
-
-});
-const copySummaryBtn = document.getElementById("copy-summary-btn");
-
-if (copySummaryBtn) {
-
-    copySummaryBtn.addEventListener("click", function () {
-
-        const summary = document.getElementById("summary-text").innerText;
-
-        navigator.clipboard.writeText(summary);
-
-        this.innerHTML = "✅ Copied";
-
-        setTimeout(() => {
-
-            this.innerHTML = "📋 Copy Summary";
-
-        }, 2000);
-
-    });
-
+const dropArea = document.getElementById('drop-area');
+const fileInput = document.getElementById('file-input');
+const fileName = document.getElementById('file-name');
+function showFile(file) {
+  if (!file) return;
+  if (file.type && file.type !== 'application/pdf') { fileName.textContent = 'Please select a PDF file.'; return; }
+  fileName.textContent = `✓ ${file.name} selected`;
+  dropArea?.classList.add('file-selected');
 }
+fileInput?.addEventListener('change', () => showFile(fileInput.files[0]));
+['dragenter', 'dragover'].forEach((eventName) => dropArea?.addEventListener(eventName, (event) => { event.preventDefault(); dropArea.classList.add('drag-active'); }));
+['dragleave', 'drop'].forEach((eventName) => dropArea?.addEventListener(eventName, (event) => { event.preventDefault(); dropArea.classList.remove('drag-active'); }));
+dropArea?.addEventListener('drop', (event) => {
+  const [file] = event.dataTransfer.files;
+  if (!file || (file.type && file.type !== 'application/pdf')) { fileName.textContent = 'Please drop a PDF file.'; return; }
+  fileInput.files = event.dataTransfer.files;
+  showFile(file);
+});
+
+function setLoading(formId, buttonId, text) {
+  const form = document.getElementById(formId), button = document.getElementById(buttonId);
+  form?.addEventListener('submit', () => { button.disabled = true; button.textContent = text; });
+}
+setLoading('upload-form', 'upload-btn', 'Analyzing your report…');
+setLoading('ask-form', 'ask-btn', 'Thinking…');
+
+document.querySelectorAll('.quick-question').forEach((button) => button.addEventListener('click', () => {
+  const questionInput = document.getElementById('question-input');
+  if (questionInput) { questionInput.value = button.textContent; questionInput.focus(); }
+}));
+document.getElementById('copy-summary-btn')?.addEventListener('click', async function () {
+  const summary = document.getElementById('summary-text')?.innerText || '';
+  if (!summary.trim()) return;
+  await navigator.clipboard.writeText(summary);
+  this.textContent = 'Copied ✓';
+  setTimeout(() => { this.textContent = 'Copy summary'; }, 2000);
+});
+window.addEventListener('load', () => { const chatBox = document.getElementById('chat-box'); if (chatBox) chatBox.scrollTop = chatBox.scrollHeight; });

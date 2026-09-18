@@ -4,238 +4,101 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AI Health Report Analyzer Agent</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='output.css') }}">
+    <meta name="description" content="Upload a medical report and receive clear AI-powered insights.">
+    <title>Health Analyzer | AI Health Analyzer</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@600;700;800&display=swap"
+        rel="stylesheet">
     <link rel="stylesheet" href="{{ url_for('static', filename='design.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='dark-mode.css') }}">
-
 </head>
 
-<body
-    class="min-h-screen bg-linear-to-br from-blue-50 via-white to-cyan-100 text-slate-900 dark:from-slate-900 dark:via-slate-950 dark:to-slate-900 dark:text-slate-100 transition-colors duration-300">
-    
-    <button id="dark-mode-toggle" class="dark-mode-toggle" type="button" aria-pressed="false"
-        aria-label="Enable dark mode">
-        <span aria-hidden="true">🌙</span>
-        <span class="dark-mode-label">Dark mode</span>
-    </button>
-     
-    <!-- Logout button and welcome message if user is logged in -->
-    {% if user_name %}
-    <div class="header-profile">
-    <span class="welcome-text">Welcome, {{ user_name }}!</span>
-    <a href="/logout" class="logout-btn">Logout</a>
-    </div>
-    {% endif %}
-
-    <div class="max-w-6xl mx-auto px-6 py-10">
-        <!-- Hero Section -->
-        <div class="text-center mb-12">
-
-            <h1 class="text-5xl font-extrabold text-blue-700">
-                🤖 AI Health Report Analyzer Agent
-            </h1>
-
-            <p class="text-gray-600 text-lg mt-4 dark:text-slate-300">
-                Upload your medical report and get AI-powered health insights in seconds.
-            </p>
-
-        </div>
-
-        <!-- Upload Card -->
-        <div class="bg-white rounded-3xl shadow-2xl p-8 max-w-2xl mx-auto dark:bg-slate-800 dark:shadow-slate-900/40">
-
-            <h2 class="text-2xl font-bold text-center mb-6">
-                📄 Upload Your Health Report
-            </h2>
-
-
-            <form action="/upload" id="upload-form" method="POST" enctype="multipart/form-data" class="space-y-6">
-
-                <!-- Upload Box -->
-
-
-                <label id="drop-area"
-                    class="block border-2 border-dashed border-blue-300 rounded-2xl p-10 text-center hover:border-blue-500 hover:bg-blue-50 transition cursor-pointer">
-
-                    <div class="text-6xl mb-3">
-                        📄
-                    </div>
-
-                    <h3 class="text-xl font-semibold">
-                        Drag & Drop your PDF here
-                    </h3>
-
-                    <p class="text-gray-500 mt-2 dark:text-slate-400">
-                        or click to browse
-                    </p>
-
-                    <p id="file-name" class="text-sm text-blue-600 mt-3">
-                        No file selected
-                    </p>
-
-                    <input id="file-input" type="file" name="report" accept=".pdf" class="hidden">
-
-                </label>
-
-
-
-                <button id="upload-btn" type="submit"
-                    class="w-full bg-blue-600 text-white py-4 rounded-2xl text-lg font-semibold hover:bg-blue-700 hover:scale-105 transition duration-300">
-
-                    🚀 Analyze Report
-
-                </button>
-
-                <p class="text-center text-sm text-gray-500 dark:text-slate-400">
-
-                    🔒 Your report is processed securely and is not stored permanently.
-
-                </p>
-
-            </form>
-
-
-
-        </div>
-
-        <!-- Result -->
-        <div class="bg-white rounded-3xl shadow-xl p-8 mt-10 dark:bg-slate-800 dark:shadow-slate-900/40">
-
-            <h2 class="text-2xl font-bold mb-4">
-                📊 Report Analysis
-            </h2>
-
-            <pre>{{ message }}</pre>
-
-        </div>
-
-        <!-- AI Summary -->
-        <div
-            class="bg-white rounded-3xl shadow-xl p-8 mt-10 overflow-hidden dark:bg-slate-800 dark:shadow-slate-900/40">
-
-            <h2 class="text-2xl font-bold mb-4">
-                🤖 AI Health Summary
-            </h2>
-
-            <div id="summary-text"
-                class="whitespace-pre-wrap break-all overflow-x-auto max-w-full text-slate-700 dark:text-slate-200 leading-7">
-                {{ ai_summary }}
+<body>
+    <header class="app-header">
+        <nav class="app-nav app-container" aria-label="Application navigation"><a class="brand" href="/home"><span
+                    class="brand-mark">✦</span><span>AI Health Analyzer</span></a>
+            <div class="header-actions">
+                <div class="system-status"><span class="status-dot"></span>System online</div><button
+                    id="dark-mode-toggle" class="dark-mode-toggle" type="button" aria-pressed="false"><span
+                        class="theme-icon">☾</span><span class="dark-mode-label">Dark mode</span></button>{% if
+                user_name %}<div class="profile-menu"><span class="welcome-text">Hi, {{ user_name }}</span><a
+                        href="/logout" class="logout-btn">Log out</a></div>{% endif %}
             </div>
-
-            <button type="button" id="copy-summary-btn"
-                class="mt-4 bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition dark:bg-sky-500 dark:hover:bg-sky-400">
-
-                📋 Copy Summary
-
-            </button>
-
-        </div>
-
-        <!-- AI Chat -->
-        <div id="ai-chat" class="bg-white rounded-3xl shadow-xl p-8 mt-10 dark:bg-slate-800 dark:shadow-slate-900/40">
-
-            <h2 class="text-2xl font-bold mb-5 dark:text-slate-100">
-                💬 Ask AI About Your Report
-            </h2>
-
-            <form action="/ask" id="ask-form" method="POST" class="flex gap-3">
-
-                <input id="question-input" type="text" name="question" placeholder="Ask anything..."
-                    class="flex-1 border rounded-xl p-3 bg-white dark:bg-slate-700 dark:text-slate-100 dark:border-slate-600">
-
-                <button type="submit" id="ask-btn"
-                    class="bg-green-600 text-white px-6 rounded-xl hover:bg-green-700 transition">
-
-                    Ask AI
-
-                </button>
-
-            </form>
-            <div class="mt-5 flex flex-wrap gap-3">
-
-                <button type="button"
-                    class="quick-question bg-gray-100 hover:bg-blue-100 px-4 py-2 rounded-full border dark:bg-slate-700 dark:hover:bg-slate-600 dark:border-slate-700 dark:text-slate-100">
-                    🩸 Explain HbA1c
-                </button>
-
-                <button type="button"
-                    class="quick-question bg-gray-100 hover:bg-blue-100 px-4 py-2 rounded-full border dark:bg-slate-700 dark:hover:bg-slate-600 dark:border-slate-700 dark:text-slate-100">
-                    🍬 Explain Blood Sugar
-                </button>
-
-                <button type="button"
-                    class="quick-question bg-gray-100 hover:bg-blue-100 px-4 py-2 rounded-full border dark:bg-slate-700 dark:hover:bg-slate-600 dark:border-slate-700 dark:text-slate-100">
-                    🥗 Give Diet Plan
-                </button>
-
-                <button type="button"
-                    class="quick-question bg-gray-100 hover:bg-blue-100 px-4 py-2 rounded-full border dark:bg-slate-700 dark:hover:bg-slate-600 dark:border-slate-700 dark:text-slate-100">
-                    📄 Summarize My Report
-                </button>
-
-            </div>
-
-            {% if ai_answer %}
-
-            {% if chat_history %}
-
-            <div id="chat-box"
-                class="mt-6 h-112.5 overflow-y-auto space-y-5 bg-gray-50 rounded-2xl p-5 border dark:bg-slate-900 dark:border-slate-700">
-
-                {% for chat in chat_history %}
-
-                {% if chat["role"] == "user" %}
-
-                <div class="flex justify-end items-end gap-3">
-
-                    <div class="bg-blue-600 text-white p-4 rounded-2xl max-w-md shadow">
-
-                        {{ chat["message"] }}
-
-                    </div>
-
-                    <div
-                        class="w-10 h-10 rounded-full bg-blue-600 flex items-center justify-center text-white font-bold">
-
-                        👤
-
-                    </div>
-
+        </nav>
+    </header>
+    <main class="app-container page-content">
+        <section class="analyzer-hero">
+            <p class="eyebrow"><span class="eyebrow-dot"></span>AI-powered report understanding</p>
+            <h1>Your health report,<br><span>made easier to understand.</span></h1>
+            <p>Upload your medical report and get a simple, clear overview of your health parameters in seconds.</p>
+        </section>
+        <section class="upload-card panel">
+            <div class="card-heading"><span class="heading-icon">↥</span>
+                <div>
+                    <p class="card-kicker">Start here</p>
+                    <h2>Upload your health report</h2>
                 </div>
-
-                {% else %}
-
-                <div class="flex justify-start items-end gap-3">
-
-                    <div class="w-10 h-10 rounded-full bg-blue-600 flex items-center justify-center text-xl">
-
-                        🤖
-
-                    </div>
-
-                    <div
-                        class="bg-white border p-4 rounded-2xl max-w-[75%] shadow dark:bg-slate-700 dark:border-slate-600 dark:text-slate-100">
-
-                        {{ chat["message"] }}
-
-                    </div>
-
-                </div>
-                {% endif %}
-
-                {% endfor %}
-
             </div>
-
-            {% endif %}
-
-
-            {% endif %}
-
+            <form action="/upload" id="upload-form" method="POST" enctype="multipart/form-data"><label id="drop-area"
+                    class="drop-area" for="file-input"><span class="upload-icon">▤</span><strong>Drop your PDF
+                        here</strong><span>or click to browse from your device</span><span id="file-name"
+                        class="file-name">No file selected</span><input id="file-input" type="file" name="report"
+                        accept="application/pdf,.pdf"></label><button id="upload-btn" class="primary-button"
+                    type="submit">✦ Analyze my report →</button>
+                <p class="privacy-note">⌁ Your report is processed securely and is not stored permanently.</p>
+            </form>
+        </section>
+        <section class="results-grid">
+            <article class="panel result-card">
+                <div class="card-heading"><span class="heading-icon soft-blue">⌁</span>
+                    <div>
+                        <p class="card-kicker">Report details</p>
+                        <h2>Report analysis</h2>
+                    </div>
+                </div>
+                <pre>{{ message }}</pre>
+            </article>
+            <article class="panel result-card">
+                <div class="card-heading"><span class="heading-icon soft-teal">✦</span>
+                    <div>
+                        <p class="card-kicker">Plain-language overview</p>
+                        <h2>AI health summary</h2>
+                    </div>
+                </div>
+                <div id="summary-text">{{ ai_summary }}</div><button type="button" id="copy-summary-btn"
+                    class="copy-button">Copy summary</button>
+            </article>
+        </section>
+        <section id="ai-chat" class="panel chat-panel">
+            <div class="card-heading"><span class="heading-icon soft-teal">✦</span>
+                <div>
+                    <p class="card-kicker">Ask a follow-up</p>
+                    <h2>Talk to your report</h2>
+                </div>
+            </div>
+            <p class="chat-intro">Ask for a simple explanation of any term or result from your uploaded report.</p>
+            <form action="/ask" id="ask-form" method="POST" class="ask-form"><input id="question-input" type="text"
+                    name="question" placeholder="For example, what does HbA1c mean?" required><button type="submit"
+                    id="ask-btn" class="ask-button">Ask AI →</button></form>
+            <div class="quick-questions"><button type="button" class="quick-question">Explain HbA1c</button><button
+                    type="button" class="quick-question">Explain blood sugar</button><button type="button"
+                    class="quick-question">Give a diet plan</button><button type="button"
+                    class="quick-question">Summarize my report</button></div>{% if chat_history %}<div id="chat-box"
+                class="chat-box">{% for chat in chat_history %}<div
+                    class="chat-row {{ 'user-row' if chat['role'] == 'user' else 'ai-row' }}">{% if chat['role'] !=
+                    'user' %}<span class="chat-avatar ai-avatar">✦</span>{% endif %}<div
+                        class="chat-message {{ 'user-message' if chat['role'] == 'user' else 'ai-message' }}">{{
+                        chat['message'] }}</div>{% if chat['role'] == 'user' %}<span
+                        class="chat-avatar user-avatar">U</span>{% endif %}</div>{% endfor %}</div>{% endif %}
+        </section>
+    </main>
+    <footer class="app-footer">
+        <div class="app-container">For informational purposes only. Always consult a qualified healthcare professional.
         </div>
-
-    </div>
-
+    </footer>
     <script src="{{ url_for('static', filename='javascript/script.js') }}"></script>
 </body>
+
+</html>
