@@ -610,4 +610,87 @@ button:disabled {
     .drop-area {
         padding: 2rem 1rem
     }
+}/* --- App Page Animations (design.css) --- */
+@keyframes slide-down-fade {
+  from { opacity: 0; transform: translateY(-20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes slide-up-fade {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.analyzer-hero {
+    animation: slide-down-fade 0.7s ease-out forwards;
+}
+
+.upload-card {
+    opacity: 0;
+    animation: slide-up-fade 0.7s ease-out 0.2s forwards;
+}
+
+/* Stagger the result cards */
+.results-grid .result-card:nth-child(1) {
+    opacity: 0;
+    animation: slide-up-fade 0.6s ease-out 0.4s forwards;
+}
+
+.results-grid .result-card:nth-child(2) {
+    opacity: 0;
+    animation: slide-up-fade 0.6s ease-out 0.6s forwards;
+}
+
+.chat-panel {
+    opacity: 0;
+    animation: slide-up-fade 0.6s ease-out 0.8s forwards;
+}
+
+/* Add a pulse effect to the drop area when dragging */
+@keyframes pulse-border {
+  0% { box-shadow: 0 0 0 0 rgba(33, 105, 232, 0.4); }
+  70% { box-shadow: 0 0 0 10px rgba(33, 105, 232, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(33, 105, 232, 0); }
+}
+
+.drop-area.drag-active {
+    animation: pulse-border 1.5s infinite;
+}
+/* --- Hover Animations for App Interface --- */
+
+/* Result Cards & Panels 3D Lift */
+.result-card, .chat-panel {
+    transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.3s ease;
+}
+
+.result-card:hover, .chat-panel:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 22px 60px rgba(40, 69, 116, 0.15);
+}
+
+/* Quick Questions Bouncy Pop */
+.quick-question {
+    transition: transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1), background-color 0.2s, color 0.2s;
+}
+
+.quick-question:hover {
+    transform: scale(1.06) translateY(-2px);
+    box-shadow: 0 6px 16px rgba(33, 105, 232, 0.15);
+}
+
+/* Copy Button Hover Enhance */
+.copy-button {
+    transition: all 0.25s ease;
+}
+
+.copy-button:hover {
+    background: #dceaff;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 10px rgba(33, 105, 232, 0.1);
+}
+
+/* Header Brand Logo Hover */
+.brand:hover .brand-mark {
+    transform: rotate(15deg) scale(1.1);
+    transition: transform 0.3s ease;
 }
