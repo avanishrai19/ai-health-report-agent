@@ -1,3 +1,8 @@
+# 🩺 AI Health Agent
+
+An intelligent, LLM-powered virtual health assistant designed to provide personalized wellness advice, preliminary symptom analysis, and proactive health tracking. 
+
+*Disclaimer: This AI Health Agent is for informational purposes only and is not a substitute for professional medical advice, diagnosis, or treatment.*
 # AI Health Report Analyzer 🩺
 
 An AI-powered web application that analyzes medical PDF reports using Google Gemini API and provides easy-to-understand health insights.
