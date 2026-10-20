@@ -45,7 +45,8 @@ UPLOAD_FOLDER = "upload"
 app.config["UPLOAD_FOLDER"] = UPLOAD_FOLDER
 os.makedirs(UPLOAD_FOLDER, exist_ok=True)
 
-client = genai.Client(api_key=os.getenv('GENAI_API_KEY'))
+api_key = os.getenv("GENAI_API_KEY")
+client = genai.Client(api_key=api_key) if api_key else None
 
 # Global Variables[cite: 1]
 report_text = ""
@@ -59,6 +60,9 @@ def get_ai_response(prompt_text):
     Hybrid AI Fallback: Tries Gemini Cloud first, 
     if it fails or network drops, switches to local Ollama 3b.
     """
+    if client is None:
+        return "AI analysis is unavailable because GENAI_API_KEY is not configured."
+
     try:
         # 1. Try Gemini Cloud API
         response = client.models.generate_content(
