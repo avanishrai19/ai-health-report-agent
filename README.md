@@ -1,6 +1,8 @@
 # AI Health Report Analyzer
 
-An AI-powered Flask web app that reads medical PDF reports and presents health information in simpler language. It is for informational purposes only and is not a substitute for professional medical advice.
+An AI-powered Flask web app that reads medical PDF reports and presents health information in simpler language.
+
+*Disclaimer: This app is for informational purposes only and is not a substitute for professional medical advice, diagnosis, or treatment.*
 
 ## Run locally
 
