@@ -12,12 +12,17 @@ load_dotenv()
 
 # App Setup and Secret Key for Session
 app = Flask(__name__)
-app.secret_key = "my_super_secret_key"  #[cite: 1]
+app.secret_key = os.getenv("SECRET_KEY") or os.urandom(32)
 
 # ==========================================
 # 1. DATABASE CONFIGURATION[cite: 1]
 # ==========================================
-app.config['SQLALCHEMY_DATABASE_URI'] = os.getenv('DATABASE_URL')
+database_url = os.getenv("DATABASE_URL")
+if database_url and database_url.startswith("postgres://"):
+    database_url = database_url.replace("postgres://", "postgresql://", 1)
+
+os.makedirs(app.instance_path, exist_ok=True)
+app.config["SQLALCHEMY_DATABASE_URI"] = database_url or "sqlite:///health_report_analyzer.db"
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db = SQLAlchemy(app)
 
@@ -27,6 +32,10 @@ class User(db.Model):
     name = db.Column(db.String(100))
     email = db.Column(db.String(100), unique=True, nullable=False)
     password = db.Column(db.String(200), nullable=False)
+
+
+with app.app_context():
+    db.create_all()
 
 
 # ==========================================

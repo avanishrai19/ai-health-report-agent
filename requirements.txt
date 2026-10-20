@@ -1,8 +1,9 @@
-npx @tailwindcss/cli -i ./static/input.css -o ./static/output.css --watch
-
-// python library
-from PyPDF2 import PdfReader
-from flask import Flask, render_template, request, redirect
-import os
-import re
-from google import genai
+Flask
+Flask-SQLAlchemy
+PyPDF2
+requests
+google-genai
+python-dotenv
+gunicorn
+psycopg2-binary
+PyMySQL
